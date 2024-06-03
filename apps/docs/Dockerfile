@@ -1,3 +1,8 @@
+# TODO: optimize this Dockerfile to only copy the necessary files https://turbo.build/repo/docs/handbook/deploying-with-docker
+# TODO: use more recent node
+# TODO: use shared Dockerfile for web and docs
+# TODO: add tags to the image
+
 FROM node:16
 
 WORKDIR /usr/src/app
