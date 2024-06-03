@@ -16,9 +16,11 @@ jobs:
           - dockerfile: ./apps/docs/Dockerfile
             image: ghcr.io/temperantia/vacation-planner-docs
             app: vacation-planner-docs
+            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DOCS }}
           - dockerfile: ./apps/web/Dockerfile
             image: ghcr.io/temperantia/vacation-planner-web
             app: vacation-planner-web
+            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_WEB }}
     permissions:
       contents: read
       packages: write
@@ -52,5 +54,5 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ matrix.app }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ matrix.publish-profile }}
           images: ${{ matrix.image }}
