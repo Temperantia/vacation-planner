@@ -1,9 +1,5 @@
 name: Build and deploy to Azure Kubernetes Service
 
-env:
-  RESOURCE_GROUP: example-resources # set this to the resource group containing your AKS cluster
-  CLUSTER_NAME: example-aks1 # set this to the name of your AKS cluster
-
 on: [push]
 
 permissions:
@@ -22,11 +18,10 @@ jobs:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
 
       - name: Gets K8s context
-        uses: azure/aks-set-context@94ccc775c1997a3fcfbfbce3c459fec87e0ab188
+        uses: azure/aks-set-context@v3
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          resource-group: ${{ env.RESOURCE_GROUP }}
-          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: example-resources
+          cluster-name: example-aks1
         id: login
 
       - name: Deploys application
