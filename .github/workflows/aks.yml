@@ -1,38 +1,41 @@
 name: Build and deploy to Azure Kubernetes Service
 
 env:
-  PROJECT_NAME: MY_PROJECT_NAME              # set this to your project's name
-  RESOURCE_GROUP: example-resources          # set this to the resource group containing your AKS cluster
-  CLUSTER_NAME: example-aks1              # set this to the name of your AKS cluster
+  RESOURCE_GROUP: example-resources # set this to the resource group containing your AKS cluster
+  CLUSTER_NAME: example-aks1 # set this to the name of your AKS cluster
 
 on: [push]
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: 'Az CLI login'
-      uses: azure/login@v1
-      with:
+      - name: "Az CLI login"
+        uses: azure/login@v1
+        with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - name: Gets K8s context
-      uses: azure/aks-set-context@94ccc775c1997a3fcfbfbce3c459fec87e0ab188
-      with:
+      - name: Gets K8s context
+        uses: azure/aks-set-context@94ccc775c1997a3fcfbfbce3c459fec87e0ab188
+        with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           resource-group: ${{ env.RESOURCE_GROUP }}
           cluster-name: ${{ env.CLUSTER_NAME }}
-      id: login
+        id: login
 
-    - name: Deploys application
-      uses: Azure/k8s-deploy@dd4bbd13a5abd2fc9ca8bdcb8aee152bb718fa78
-      with:
-        manifests: ${{ steps.bake.outputs.manifestsBundle }}
-        images: |
-          ghcr.io/temperantia/vacation-planner-web
-        imagepullsecrets: |
-          ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploys application
+        uses: Azure/k8s-deploy@dd4bbd13a5abd2fc9ca8bdcb8aee152bb718fa78
+        with:
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
+          images: |
+            ghcr.io/temperantia/vacation-planner-web
+          imagepullsecrets: |
+            ${{ secrets.GITHUB_TOKEN }}
