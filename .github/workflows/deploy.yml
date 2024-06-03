@@ -6,10 +6,6 @@ on:
     branches:
       - main
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
@@ -18,9 +14,11 @@ jobs:
       matrix:
         include:
           - dockerfile: ./apps/docs/Dockerfile
-            image: ghcr.io/Temperantia/vacation-planner-docs
+            image: ghcr.io/temperantia/vacation-planner-docs
+            app: vacation-planner-docs
           - dockerfile: ./apps/web/Dockerfile
-            image: ghcr.io/Temperantia/vacation-planner-web
+            image: ghcr.io/temperantia/vacation-planner-web
+            app: vacation-planner-web
     permissions:
       contents: read
       packages: write
@@ -32,7 +30,7 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -53,6 +51,6 @@ jobs:
 
       - uses: azure/webapps-deploy@v2
         with:
-          app-name: vp-example
+          app-name: ${{ matrix.app }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: ${{ matrix.image }}
