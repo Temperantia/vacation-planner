@@ -16,11 +16,11 @@ jobs:
           - dockerfile: ./apps/docs/Dockerfile
             image: ghcr.io/temperantia/vacation-planner-docs
             app: vacation-planner-docs
-            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DOCS }}
+            publish-profile: '${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DOCS }}'
           - dockerfile: ./apps/web/Dockerfile
             image: ghcr.io/temperantia/vacation-planner-web
             app: vacation-planner-web
-            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_WEB }}
+            publish-profile: '${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_WEB }}'
     permissions:
       contents: read
       packages: write
