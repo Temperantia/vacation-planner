@@ -51,7 +51,7 @@ jobs:
           file: ${{ matrix.dockerfile }}
           push: true
           tags:
-            ${{ steps.meta.outputs.tags }}
+            ${{ steps.meta.outputs.tags }},
             ghcr.io/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
 
