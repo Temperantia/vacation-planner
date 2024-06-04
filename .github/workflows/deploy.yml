@@ -52,7 +52,7 @@ jobs:
           push: true
           tags:
             ${{ steps.meta.outputs.tags }},
-            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/temperantia/vacation-planner:latest
           labels: ${{ steps.meta.outputs.labels }}
 
       - uses: azure/webapps-deploy@v2
