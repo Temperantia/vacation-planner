@@ -14,11 +14,11 @@ jobs:
       matrix:
         include:
           - dockerfile: ./apps/docs/Dockerfile
-            image: ghcr.io/temperantia/vacation-planner-docs
+            image: ghcr.io/temperantia/vacation-planner-docs:main
             app: vacation-planner-docs
             publish-profile: AZURE_WEBAPP_PUBLISH_PROFILE_DOCS
           - dockerfile: ./apps/web/Dockerfile
-            image: ghcr.io/temperantia/vacation-planner-web
+            image: ghcr.io/temperantia/vacation-planner-web:main
             app: vacation-planner-web
             publish-profile: AZURE_WEBAPP_PUBLISH_PROFILE_WEB
     permissions:
