@@ -50,9 +50,8 @@ jobs:
             AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}
           file: ${{ matrix.dockerfile }}
           push: true
-          tags:
-            ${{ steps.meta.outputs.tags }},
-            ghcr.io/temperantia/vacation-planner:latest
+          tags: ${{ steps.meta.outputs.tags }},
+            ${{ matrix.image }}:latest
           labels: ${{ steps.meta.outputs.labels }}
 
       - uses: azure/webapps-deploy@v2
