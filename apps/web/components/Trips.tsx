@@ -42,8 +42,8 @@ const Flights = ({ flights }: any) => (
                     <div key={index}>
                       <p>
                         {departure.iataCode} <DateText date={departure.at} /> -{" "}
-                        {arrival.iataCode} <DateText date={arrival.at} />{" "}
-                        with {carrier}
+                        {arrival.iataCode} <DateText date={arrival.at} /> with{" "}
+                        {carrier}
                       </p>
                     </div>
                   )
@@ -78,6 +78,9 @@ const Trips = () => {
         adults: adultsInput.value,
       }),
     });
+    if (!response.ok) {
+      return;
+    }
     const data = await response.json();
     setData(data);
   };

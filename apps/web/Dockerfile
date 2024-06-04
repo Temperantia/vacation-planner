@@ -1,5 +1,10 @@
 FROM node:18-alpine AS base
 
+ENV AZURE_CLIENT_ID=276cd467-4e6b-4211-864d-3937af83ca02
+ENV AZURE_TENANT_ID=b8c11c68-d479-4859-8b8f-929e92a9e365
+ARG AZURE_CLIENT_SECRET
+ENV AZURE_CLIENT_SECRET=$AZURE_CLIENT_SECRET
+
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
 

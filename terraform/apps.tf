@@ -20,7 +20,7 @@ resource "azurerm_linux_web_app" "vacation-planner-docs" {
   site_config {
     always_on = false
     application_stack {
-      docker_image_name   = "vacation-planner-docs"
+      docker_image_name   = "vacation-planner-docs:main"
       docker_registry_url = "https://ghcr.io/temperantia"
     }
   }
@@ -39,7 +39,7 @@ resource "azurerm_linux_web_app" "vacation-planner-web" {
   site_config {
     always_on = false
     application_stack {
-      docker_image_name   = "vacation-planner-web"
+      docker_image_name   = "vacation-planner-web:main"
       docker_registry_url = "https://ghcr.io/temperantia"
     }
   }

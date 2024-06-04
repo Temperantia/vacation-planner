@@ -25,21 +25,3 @@ resource "azurerm_key_vault" "vacation-planner-vault" {
   }
 }
 
-resource "azurerm_key_vault_secret" "cosmos-db-key" {
-  name         = "cosmos-db-key"
-  value        = ""
-  key_vault_id = azurerm_key_vault.vacation-planner-vault.id
-}
-
-resource "azurerm_key_vault_secret" "amadeus-key" {
-  name         = "amadeus-key"
-  value        = ""
-  key_vault_id = azurerm_key_vault.vacation-planner-vault.id
-}
-
-resource "azurerm_key_vault_secret" "amadeus-secret" {
-  name         = "camadeus-secret"
-  value        = ""
-  key_vault_id = azurerm_key_vault.vacation-planner-vault.id
-}
-
